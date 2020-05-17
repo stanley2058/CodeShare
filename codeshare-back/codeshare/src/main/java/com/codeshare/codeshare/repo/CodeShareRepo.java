@@ -2,10 +2,10 @@ package com.codeshare.codeshare.repo;
 
 import java.util.Optional;
 
-import com.codeshare.codeshare.model.Projects;
+import com.codeshare.codeshare.model.Project;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface CodeShareRepo extends MongoRepository<Projects, String> {
-    public Optional<Projects> findByUUID(String UUID);
-    public Optional<Projects> findByShortCode(String shortCode);
+public interface CodeShareRepo extends MongoRepository<Project, String> {
+    public Optional<Project> findByUUID(String UUID);
+    public Optional<Project> findByShortCode(String shortCode);
 }

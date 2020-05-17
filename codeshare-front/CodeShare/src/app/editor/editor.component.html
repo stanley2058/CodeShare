@@ -1,0 +1,67 @@
+<div>
+    <div><app-header></app-header></div>
+    <div class="center-container">
+        <div class="editor-panel">
+            <ace [mode]="editorMode" [theme]="editorTheme" [(value)]="value" [disabled]="readonly" #editor></ace>
+            <div class="control-panel">
+                <button mat-raised-button color="primary" id="submitProject" (click)="saveProject()">Save</button>
+                <button mat-raised-button color="accent" id="downloadProjectImage">Download As Image</button>
+                <button mat-raised-button color="accent" id="downloadProjectFile">Download As File</button>
+                <mat-form-field *ngIf="saved" class="shareDisplay" matTooltip="Click To Copy" [matTooltipPosition]="'right'">
+                    <mat-label>Share URL</mat-label>
+                    <input matInput [readonly]="true" value="{{getShareUrl()}}">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="option-panel option-panel-dark">
+            <div class="editor-options">
+                <mat-form-field class="languageSelect">
+                    <mat-label>Select Language</mat-label>
+                    <mat-select [(value)]="editorMode">
+                        <mat-option value="javascript">Javascript</mat-option>
+                        <mat-option value="html">HTML</mat-option>
+                        <mat-option value="css">CSS</mat-option>
+                        <mat-option value="java">Java</mat-option>
+                        <mat-option value="python">Python</mat-option>
+                        <mat-option value="c_cpp">C/C++</mat-option>
+                        <mat-option value="csharp">C#</mat-option>
+                        <mat-option value="ruby">Ruby</mat-option>
+                        <mat-option value="xml">XML</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="fontsizeSelect">
+                    <mat-label>Select Font Size</mat-label>
+                    <mat-select [(value)]="fontSize" (selectionChange)="fontSizeChanged()">
+                        <mat-option value="8px">8px</mat-option>
+                        <mat-option value="10px">10px</mat-option>
+                        <mat-option value="12px">12px</mat-option>
+                        <mat-option value="14px">14px</mat-option>
+                        <mat-option value="16px">16px</mat-option>
+                        <mat-option value="18px">18px</mat-option>
+                        <mat-option value="20px">20px</mat-option>
+                        <mat-option value="24px">24px</mat-option>
+                        <mat-option value="28px">28px</mat-option>
+                        <mat-option value="32px">32px</mat-option>
+                        <mat-option value="48px">48px</mat-option>
+                        <mat-option value="64px">64px</mat-option>
+                        <mat-option value="72px">72px</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="comment-section">
+                <div class="comment comment-dark"><app-comment [comments]="project?.comments"></app-comment></div>
+                
+                <div class="commentInput">
+                    <mat-form-field>
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea matInput 
+                            cdkTextareaAutosize
+                            cdkAutosizeMinRows="4"
+                            cdkAutosizeMaxRows="4"></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" id="submitComment">Submit Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+.chatroom {
+    display: flex;
+    flex-direction: column;
+    max-height: 80%;
+    overflow: auto;
+}

@@ -1,0 +1,98 @@
+ace {
+    width: 100%;
+    height: 90%;
+}
+
+.editor-panel {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.center-container {
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: row;
+}
+
+.option-panel {
+    width: 20%;
+    height: 100%;
+}
+.option-panel-light {
+    background-color: white;
+}
+.option-panel-dark {
+    background-color: darkcyan;
+}
+
+.editor-options {
+    height: 100px;
+    width: 100%;
+}
+
+.languageSelect {
+    width: 80px;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.fontsizeSelect {
+    width: 80px;
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.comment-section {
+    height: calc(100% - 100px);
+}
+
+.comment {
+    width: calc(100% - 40px);
+    height: calc(100% - 100px);
+    max-height: calc(100% - 200px);
+    overflow: auto;
+    padding-left: 40px;
+}
+.comment-light {
+    background-color: lightgray;
+}
+.comment-dark {
+    background-color: darkslategray;
+}
+
+.commentInput {
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.commentInput mat-form-field {
+    width: calc(100% - 40px);
+    height: 80px;
+}
+
+#submitComment {
+    position: relative;
+    top: 20px;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: row;
+}
+
+.control-panel button, .shareDisplay {
+    position: relative;
+    top: 20px;
+    margin-left: 30px;
+}
+
+.shareDisplay {
+    height: 40px;
+    width: 250px;
+}
+
+.shareDisplay input {
+    cursor: pointer;
+}

@@ -1,0 +1,13 @@
+<div>
+    <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput id="username" value="{{name}}">
+    </mat-form-field>
+    <mat-form-field matTooltip="Click To Copy">
+        <mat-label>UUID</mat-label>
+        <input matInput [readonly]="uuidReadonly" id="uuid" value="{{uuid}}">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="generateUUID()">Generate UUID</button>
+    <button mat-raised-button color="warn" (click)="toggleInput()">{{uuidReadonly ? 'Input UUID' : 'Finished'}}</button>
+    <div class="discription">Your UUID is your unique identifier, please save it if you want to access your project elsewhere later.</div>
+</div>

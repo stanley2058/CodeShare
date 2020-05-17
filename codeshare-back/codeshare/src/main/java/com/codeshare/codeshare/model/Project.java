@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="Projects")
-public class Projects {
+public class Project {
     @Id
     public String id;
     @Field("UUID")

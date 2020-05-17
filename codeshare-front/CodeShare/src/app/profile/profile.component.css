@@ -1,0 +1,17 @@
+mat-form-field {
+    width: 100%
+}
+
+button {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.discription {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#uuid {
+    cursor: pointer;
+}
