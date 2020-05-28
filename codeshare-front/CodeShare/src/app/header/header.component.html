@@ -1,7 +1,8 @@
 <div class="code-share-header">
     <mat-toolbar color="primary">
+        <img src="assets/codeshare.png" alt="CodeShare">
         <h1>Code Share</h1>
-        <button mat-button [matMenuTriggerFor]="themeMenu" class="paint"><mat-icon>format_paint</mat-icon></button>
+        <button mat-button [matMenuTriggerFor]="themeMenu" class="paint" matTooltip="Click To Change Theme"><mat-icon>format_paint</mat-icon></button>
         <mat-menu #themeMenu>
             <button mat-menu-item *ngFor="let theme of themeList" (click)="changeTheme(theme.theme)">
                 <mat-icon>{{theme.using ? 'radio_button_checked' : 'radio_button_unchecked'}}</mat-icon>

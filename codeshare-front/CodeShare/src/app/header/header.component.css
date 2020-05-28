@@ -16,3 +16,8 @@ h1 {
     position: absolute;
     right: 150px;
 }
+
+img {
+    height: 50px;
+    margin-right: 10px;
+}

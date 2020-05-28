@@ -96,3 +96,9 @@ ace {
 .shareDisplay input {
     cursor: pointer;
 }
+
+.cbCheckbox {
+    position: relative;
+    top: 30px;
+    margin-left: 30px;
+}

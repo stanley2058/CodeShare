@@ -30,8 +30,12 @@ export class AppComponent implements OnInit {
     return uuid;
   }
 
+  static GetHashUUID(): string {
+    return CryptoJS.SHA256(localStorage.getItem(AppComponent.LS_KEY_UUID)).toString(CryptoJS.enc.Hex);
+  }
+
   static CompareUUID(uuidHash: String) {
-    return CryptoJS.SHA256(localStorage.getItem(AppComponent.LS_KEY_UUID)).toString(CryptoJS.enc.Hex) === uuidHash;
+    return AppComponent.GetHashUUID() === uuidHash;
   }
   
   ngOnInit(): void {

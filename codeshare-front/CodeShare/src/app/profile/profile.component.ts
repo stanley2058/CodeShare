@@ -21,12 +21,15 @@ export class ProfileComponent implements OnInit, AfterViewInit {
     this.uuidInput = (document.getElementById('uuid') as HTMLInputElement);
     this.nameInput = (document.getElementById('username') as HTMLInputElement);
     
+    console.log(this.uuidInput)
+    console.log(this.nameInput)
     this.uuidInput.addEventListener('click', () => {
+      if (!this.uuidReadonly) return;
       this.uuidInput.select();
       this.uuidInput.setSelectionRange(0, 99999);
       document.execCommand("copy");
       
-      this.snackBar.open("Copied!!", "OK", { duration: 2000});
+      this.snackBar.open("Copied!!", "OK", { duration: 2000 });
     });
   }
 
@@ -35,10 +38,22 @@ export class ProfileComponent implements OnInit, AfterViewInit {
 
   generateUUID() {
     AppComponent.GenerateUUID();
+    window.location.reload();
   }
 
   toggleInput() {
+    if (this.uuidReadonly) {
+      this.uuidInput.select();
+    } else {
+      const refresh = this.uuidInput.value !== this.uuid;
+      localStorage.setItem(AppComponent.LS_KEY_UUID, this.uuidInput.value);
+      if (refresh) window.location.reload();
+    }
+
     this.uuidReadonly = !this.uuidReadonly;
-    this.uuidInput.value = '';
+  }
+
+  usernameChanged() {
+    localStorage.setItem(AppComponent.LS_KEY_USER, this.nameInput.value);
   }
 }

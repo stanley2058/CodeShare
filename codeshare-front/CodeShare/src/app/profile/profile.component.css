@@ -12,6 +12,6 @@ button {
     margin-top: 20px;
 }
 
-#uuid {
+.uuidPointer {
     cursor: pointer;
 }

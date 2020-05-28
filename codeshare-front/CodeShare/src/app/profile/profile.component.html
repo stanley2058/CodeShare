@@ -1,11 +1,11 @@
 <div>
     <mat-form-field>
         <mat-label>Username</mat-label>
-        <input matInput id="username" value="{{name}}">
+        <input matInput id="username" (change)="usernameChanged()" value="{{name}}">
     </mat-form-field>
-    <mat-form-field matTooltip="Click To Copy">
+    <mat-form-field matTooltip="{{uuidReadonly ? 'Click To Copy' : ''}}" [matTooltipPosition]="'right'">
         <mat-label>UUID</mat-label>
-        <input matInput [readonly]="uuidReadonly" id="uuid" value="{{uuid}}">
+        <input matInput [readonly]="uuidReadonly" id="uuid" [ngClass]="{'uuidPointer': uuidReadonly}" value="{{uuid}}">
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="generateUUID()">Generate UUID</button>
     <button mat-raised-button color="warn" (click)="toggleInput()">{{uuidReadonly ? 'Input UUID' : 'Finished'}}</button>

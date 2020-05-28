@@ -4,12 +4,13 @@
         <div class="editor-panel">
             <ace [mode]="editorMode" [theme]="editorTheme" [(value)]="value" [disabled]="readonly" #editor></ace>
             <div class="control-panel">
-                <button mat-raised-button color="primary" id="submitProject" (click)="saveProject()">Save</button>
-                <button mat-raised-button color="accent" id="downloadProjectImage">Download As Image</button>
-                <button mat-raised-button color="accent" id="downloadProjectFile">Download As File</button>
-                <mat-form-field *ngIf="saved" class="shareDisplay" matTooltip="Click To Copy" [matTooltipPosition]="'right'">
+                <button mat-raised-button color="primary" *ngIf="!readonly" id="btnSave" (click)="saveProject()">Save</button>
+                <button mat-raised-button color="accent" (click)="downloadProjectImage()">Download As Image</button>
+                <button mat-raised-button color="accent" (click)="downloadProjectFile()">Download As File</button>
+                <mat-checkbox class="cbCheckbox" *ngIf="!readonly" (change)="readonlyChanged($event)" [checked]="project?.isReadonly" matTooltip="Readonly for other user." [matTooltipPosition]="'above'">Readonly</mat-checkbox>
+                <mat-form-field *ngIf="saved" class="shareDisplay" matTooltip="Click To Copy" [matTooltipPosition]="'above'">
                     <mat-label>Share URL</mat-label>
-                    <input matInput [readonly]="true" value="{{getShareUrl()}}">
+                    <input matInput [readonly]="true" (click)="copyAction($event)" value="{{getShareUrl()}}">
                 </mat-form-field>
             </div>
         </div>
@@ -18,15 +19,27 @@
                 <mat-form-field class="languageSelect">
                     <mat-label>Select Language</mat-label>
                     <mat-select [(value)]="editorMode">
-                        <mat-option value="javascript">Javascript</mat-option>
-                        <mat-option value="html">HTML</mat-option>
-                        <mat-option value="css">CSS</mat-option>
-                        <mat-option value="java">Java</mat-option>
-                        <mat-option value="python">Python</mat-option>
                         <mat-option value="c_cpp">C/C++</mat-option>
+                        <mat-option value="coffee">Coffee</mat-option>
                         <mat-option value="csharp">C#</mat-option>
+                        <mat-option value="css">CSS</mat-option>
+                        <mat-option value="dockerfile">Dockerfile</mat-option>
+                        <mat-option value="fortran">Fortran</mat-option>
+                        <mat-option value="golang">Go</mat-option>
+                        <mat-option value="html">HTML</mat-option>
+                        <mat-option value="java">Java</mat-option>
+                        <mat-option value="javascript">Javascript</mat-option>
+                        <mat-option value="json">JSON</mat-option>
+                        <mat-option value="jsp">JSP</mat-option>
+                        <mat-option value="kotlin">Kotlin</mat-option>
+                        <mat-option value="markdown">Markdown</mat-option>
+                        <mat-option value="php">PHP</mat-option>
+                        <mat-option value="python">Python</mat-option>
+                        <mat-option value="r">R</mat-option>
                         <mat-option value="ruby">Ruby</mat-option>
+                        <mat-option value="swift">Swift</mat-option>
                         <mat-option value="xml">XML</mat-option>
+                        <mat-option value="yaml">Yaml</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="fontsizeSelect">

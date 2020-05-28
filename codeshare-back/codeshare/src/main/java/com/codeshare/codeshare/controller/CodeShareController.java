@@ -27,7 +27,7 @@ public class CodeShareController {
     }
 
     @PostMapping(value = "/")
-    public void postNewProject() {
-
+    public Project postNewProject(@RequestBody Project project) {
+        return codeShareService.postProject(project);
     }
 }

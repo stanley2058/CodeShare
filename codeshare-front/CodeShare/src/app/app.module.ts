@@ -16,6 +16,7 @@ import { MatTooltipModule, MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER } from '
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 // <-- Ace Import -->
 import { AceModule } from 'ngx-ace-wrapper';
@@ -33,6 +34,18 @@ import 'brace/mode/xml';
 import 'brace/mode/ruby';
 import 'brace/mode/c_cpp';
 import 'brace/mode/css';
+import 'brace/mode/json';
+import 'brace/mode/coffee';
+import 'brace/mode/dockerfile';
+import 'brace/mode/fortran';
+import 'brace/mode/golang';
+import 'brace/mode/jsp';
+import 'brace/mode/kotlin';
+import 'brace/mode/markdown';
+import 'brace/mode/php';
+import 'brace/mode/r';
+import 'brace/mode/swift';
+import 'brace/mode/yaml';
 
 // <-- Ace Theme Import -->
 import 'brace/theme/tomorrow_night_eighties';
@@ -70,6 +83,7 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     AppRoutingModule,
     AceModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -82,7 +96,7 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     MatSnackBarModule,
     MatDialogModule,
     MatMenuModule,
-    HttpClientModule
+    MatCheckboxModule
   ],
   providers: [
     { provide: ACE_CONFIG, useValue: DEFAULT_ACE_CONFIG },
