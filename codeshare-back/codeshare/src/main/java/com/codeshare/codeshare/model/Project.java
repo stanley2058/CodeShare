@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 @Document(collection="Projects")
 public class Project {
     @Id
@@ -21,5 +23,5 @@ public class Project {
     @Field("body")
     public String body;
     @Field("comments")
-    public Comment[] comments;
+    public List<Comment> comments;
 }

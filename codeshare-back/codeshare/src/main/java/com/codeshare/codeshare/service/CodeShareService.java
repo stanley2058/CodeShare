@@ -1,7 +1,10 @@
 package com.codeshare.codeshare.service;
 
+import com.codeshare.codeshare.model.Comment;
 import com.codeshare.codeshare.model.Project;
+import com.codeshare.codeshare.model.WsProjectBody;
 import com.codeshare.codeshare.repo.CodeShareRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,17 +14,18 @@ import java.util.Optional;
 @Service
 public class CodeShareService {
     private final CodeShareRepo codeShareRepo;
+
+    @Autowired
     public CodeShareService(CodeShareRepo codeShareRepo) {
         this.codeShareRepo = codeShareRepo;
     }
 
     public Optional<Project> getByShortCode(String code) {
-        return codeShareRepo.findByShortCode(code);
+        return codeShareRepo.findProjectByShortCode(code);
     }
 
     public Project postProject(Project project) {
         if (project == null) return null;
-        System.out.println(project);
         if (project.id == null) {
             int tryCount = 0;
             do {
@@ -31,6 +35,25 @@ public class CodeShareService {
             } while (getByShortCode(project.shortCode).isPresent());
         }
         return codeShareRepo.save(project);
+    }
+
+    public WsProjectBody updateProjectViaWebsocket(String shortCode, WsProjectBody project) {
+        Optional<Project> op = codeShareRepo.findProjectByShortCode(shortCode);
+        if (op.isEmpty()) return null;
+        Project projectInDb = op.get();
+        projectInDb.body = project.body;
+        projectInDb.isReadonly = project.isReadonly;
+        projectInDb.language = project.language;
+        codeShareRepo.save(projectInDb);
+        return project;
+    }
+
+    public void updateCommentViaWebsocket(String shortCode, Comment comment) {
+        Optional<Project> op = codeShareRepo.findProjectByShortCode(shortCode);
+        if (op.isEmpty()) return;
+        Project projectInDb = op.get();
+        projectInDb.comments.add(comment);
+        codeShareRepo.save(projectInDb);
     }
 
     private String generateShortCode(int len) {

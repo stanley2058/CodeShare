@@ -2,6 +2,7 @@ package com.codeshare.codeshare.controller;
 
 import com.codeshare.codeshare.model.Project;
 import com.codeshare.codeshare.service.CodeShareService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class CodeShareController {
     private final CodeShareService codeShareService;
 
+    @Autowired
     public CodeShareController(CodeShareService codeShareService) {
         this.codeShareService = codeShareService;
     }

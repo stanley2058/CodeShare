@@ -1,17 +1,27 @@
 package com.codeshare.codeshare.controller;
 
 import com.codeshare.codeshare.model.Comment;
+import com.codeshare.codeshare.service.CodeShareService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class CommentSocketController {
-    @MessageMapping("/comment")
-    @SendTo("/websocket/comments")
-    public Comment sendComment(Comment comment) throws Exception {
-        Thread.sleep(1000); // simulated delay
-        System.out.println(comment);
-        return comment;
+    private final CodeShareService codeShareService;
+
+    @Autowired
+    public CommentSocketController(CodeShareService codeShareService) {
+        this.codeShareService = codeShareService;
+    }
+
+    @MessageMapping("/comment/{shortCode}")
+    @SendTo("/websocket/comments/{shortCode}")
+    public String sendComment(@DestinationVariable String shortCode, Comment comment) {
+        comment.timestamp = System.currentTimeMillis();
+        codeShareService.updateCommentViaWebsocket(shortCode, comment);
+        return comment.toString();
     }
 }

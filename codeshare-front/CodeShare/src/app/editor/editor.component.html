@@ -61,7 +61,7 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div class="comment-section">
+            <div class="comment-section" *ngIf="shortCode">
                 <div class="comment comment-dark"><app-comment [comments]="project?.comments"></app-comment></div>
                 
                 <div class="commentInput">
@@ -70,9 +70,10 @@
                         <textarea matInput 
                             cdkTextareaAutosize
                             cdkAutosizeMinRows="4"
-                            cdkAutosizeMaxRows="4"></textarea>
+                            cdkAutosizeMaxRows="4"
+                            id="taCommentInput"></textarea>
                     </mat-form-field>
-                    <button mat-raised-button color="primary" id="submitComment">Submit Comment</button>
+                    <button mat-raised-button color="primary" id="submitComment" (click)="submitComment()">Submit Comment</button>
                 </div>
             </div>
         </div>

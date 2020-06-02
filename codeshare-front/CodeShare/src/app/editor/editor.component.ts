@@ -1,25 +1,32 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { AceComponent } from 'ngx-ace-wrapper';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Project } from '../objects/Project';
+import { Comment } from '../objects/Comment';
 import { AppComponent } from '../app.component';
 import { FilenameMapping } from '../objects/FilenameMapping';
 import domtoimage from 'dom-to-image';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Location } from '@angular/common';
+import { Subscription, fromEvent, merge } from 'rxjs';
+import { throttleTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit, AfterViewInit {
+export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('editor') editor: AceComponent;
-  private shortCode: string;
-
+  private wsBody$: Subscription;
+  private wsBodyGet$: Subscription;
+  private wsCommentGet$: Subscription;
+  
   readonly = false;
   saved = false;
+  
+  shortCode: string;
   
   editorMode = "javascript";
   fontSize = "16px";
@@ -59,6 +66,12 @@ export class EditorComponent implements OnInit, AfterViewInit {
     commentSection.scrollTop = commentSection.scrollHeight - commentSection.clientHeight;
     this.checkTheme();
     AppComponent.ThemeTypeSubject.subscribe(() => this.checkTheme());
+  }
+
+  ngOnDestroy() {
+    if (this.wsBody$) this.wsBody$.unsubscribe();
+    if (this.wsBodyGet$) this.wsBodyGet$.unsubscribe();
+    if (this.wsCommentGet$) this.wsCommentGet$.unsubscribe();
   }
 
   copyAction(event: MouseEvent) {
@@ -112,6 +125,12 @@ export class EditorComponent implements OnInit, AfterViewInit {
     this.readonly = this.project.isReadonly;
     this.shortCode = this.project.shortCode;
     if (AppComponent.CompareUUID(this.project.UUID)) this.readonly = false;
+    if (this.shortCode && !this.wsBody$) {
+      setTimeout(() => {
+        document.querySelector(".comment").scrollTo(0, document.querySelector(".comment").scrollHeight);
+      }, 500);
+    }
+    if (this.shortCode && !this.wsBody$) this.bindWsBodySubscription();
   }
 
   getShareUrl(): string {
@@ -161,5 +180,59 @@ export class EditorComponent implements OnInit, AfterViewInit {
 
   readonlyChanged(event: MatCheckboxChange) {
     if (this.project) this.project.isReadonly = event.checked;
+  }
+
+  bindWsBodySubscription() {
+    this.wsBody$ = AppComponent.GetCodeBodyWebsocketObserverable(this.shortCode)
+    .pipe(map((message) => JSON.parse(message.body) as Project))
+    .subscribe(
+      next => {
+        // typeof next should be WsProject
+        if (next.author === AppComponent.SessionUUID) return;
+        this.project.body = next.body;
+        this.project.language = next.language;
+        this.project.isReadonly = next.isReadonly;
+        this.updateProject();
+      },
+      error => console.error(error)
+    );
+
+    const keyboard$ = merge(
+      fromEvent(document.querySelector('ace'), 'keydown'),
+      fromEvent(document.querySelector('ace'), 'keyup')
+    );
+
+    this.wsBodyGet$ = keyboard$.pipe(throttleTime(100)).subscribe(next => this.sendMsg());
+
+    this.wsCommentGet$ = AppComponent.GetCommentWebsocketObserverable(this.shortCode)
+    .pipe(map((message) => JSON.parse(message.body) as Comment))
+    .subscribe(next => {
+      this.project.comments.push(next);
+      setTimeout(() => {
+        document.querySelector(".comment").scrollTo(0, document.querySelector(".comment").scrollHeight);
+      }, 500);
+    });
+  }
+
+  sendMsg() {
+    const wsProject = {
+      body: this.value,
+      author: AppComponent.SessionUUID,
+      language: this.editorMode,
+      isReadonly: this.readonly
+    };
+    AppComponent.SendSocketMessage("/ws/contentBody/" + this.shortCode, JSON.stringify(wsProject));
+  }
+
+  submitComment() {
+    if (!this.shortCode) return;
+    const commentInput = document.getElementById('taCommentInput') as HTMLTextAreaElement;
+    const comment: Comment = {
+      commentString: commentInput.value,
+      username: localStorage.getItem(AppComponent.LS_KEY_USER),
+      timestamp: 0
+    };
+    AppComponent.SendSocketMessage("/ws/comment/" + this.shortCode, JSON.stringify(comment));
+    commentInput.value = "";
   }
 }
