@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
   static ThemeType = "dark";
   static ThemeTypeSubject = new Subject<string>();
   private static readonly stompConfig: RxStompConfig = {
-    webSocketFactory: AppComponent.SOCK_URI,
     brokerURL: AppComponent.SOCKET_URI,
     reconnectDelay: 200
   };
