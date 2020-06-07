@@ -4,9 +4,16 @@
         <div class="editor-panel">
             <ace [mode]="editorMode" [theme]="editorTheme" [(value)]="value" [disabled]="readonly" #editor></ace>
             <div class="control-panel">
-                <button mat-raised-button color="primary" *ngIf="!readonly" id="btnSave" (click)="saveProject()">Save</button>
-                <button mat-raised-button color="accent" (click)="downloadProjectImage()">Download As Image</button>
-                <button mat-raised-button color="accent" (click)="downloadProjectFile()">Download As File</button>
+                <button mat-raised-button color="primary" *ngIf="!readonly && !shortCode && !wsConnected" id="btnSave" (click)="saveProject()">Save</button>
+                <span matTooltip="Connected, auto-save is on." [matTooltipPosition]="'above'" *ngIf="wsConnected" class="material-icons link">link</span>
+                <span matTooltip="Disconnected, please check your connection, all unsaved data will be lost." [matTooltipPosition]="'above'" *ngIf="!wsConnected && shortCode" class="material-icons linkOff">link_off</span>
+
+                <button mat-raised-button color="accent" (click)="downloadProjectImage()">
+                    <span class="material-icons">get_app</span> Image
+                </button>
+                <button mat-raised-button color="accent" (click)="downloadProjectFile()">
+                    <span class="material-icons">get_app</span> File
+                </button>
                 <mat-checkbox class="cbCheckbox" *ngIf="!readonly" (change)="readonlyChanged($event)" [checked]="project?.isReadonly" matTooltip="Readonly for other user." [matTooltipPosition]="'above'">Readonly</mat-checkbox>
                 <mat-form-field *ngIf="saved" class="shareDisplay" matTooltip="Click To Copy" [matTooltipPosition]="'above'">
                     <mat-label>Share URL</mat-label>
@@ -69,8 +76,8 @@
                         <mat-label>Leave a comment</mat-label>
                         <textarea matInput 
                             cdkTextareaAutosize
-                            cdkAutosizeMinRows="4"
-                            cdkAutosizeMaxRows="4"
+                            cdkAutosizeMinRows="3"
+                            cdkAutosizeMaxRows="3"
                             id="taCommentInput"></textarea>
                     </mat-form-field>
                     <button mat-raised-button color="primary" id="submitComment" (click)="submitComment()">Submit Comment</button>

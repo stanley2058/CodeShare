@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileComponent } from '../profile/profile.component';
 import { AppComponent } from '../app.component';
@@ -10,6 +10,7 @@ import { Theme } from '../objects/Theme';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Input("isAboutPage") isAboutPage: boolean;
   readonly themeList = [
     {name: "Deep Purple & Amber (Light)", using: false, theme: Theme.DeeppurpleAmber},
     {name: "Indigo & Pink (Light)", using: false, theme: Theme.IndigoPink},
@@ -40,5 +41,13 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem(AppComponent.LS_KEY_THEME, theme);
     this.checkThemeUsing();
     AppComponent.ChangeTheme(theme);
+  }
+
+  getHome() {
+    return window.location.origin;
+  }
+
+  aboutPage() {
+    window.location.href = window.location.origin + '/about';
   }
 }

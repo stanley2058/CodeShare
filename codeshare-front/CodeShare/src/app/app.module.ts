@@ -62,8 +62,11 @@ import { HeaderComponent } from './header/header.component';
 import { CardComponent } from './card/card.component';
 import { ProfileComponent } from './profile/profile.component'
 import { HttpClientModule } from '@angular/common/http';
+import { AboutComponent } from './about/about.component';
 
 const DEFAULT_ACE_CONFIG: AceConfigInterface = {
+  wrap: true,
+  wrapBehavioursEnabled: true,
   enableBasicAutocompletion: true,
   fontSize: '16px',
   tabSize: 4,
@@ -76,7 +79,8 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     CommentComponent,
     HeaderComponent,
     CardComponent,
-    ProfileComponent
+    ProfileComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

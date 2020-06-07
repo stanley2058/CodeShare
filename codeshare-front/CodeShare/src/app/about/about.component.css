@@ -1,0 +1,25 @@
+h1 {
+    font-size: 36pt;
+}
+h2 {
+    font-size: 18pt;
+}
+
+.techPanel {
+    margin-top: 20px;
+}
+
+.techPanel ul {
+    position: relative;
+    width: 120px;
+    text-align: left;
+    left: calc(50% - 85px);
+}
+
+.centerPanel {
+    position: relative;
+    top: 40px;
+    left: calc(50vw - 150px);
+    width: 300px;
+    text-align: center;
+}

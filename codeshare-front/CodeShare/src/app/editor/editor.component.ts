@@ -9,8 +9,9 @@ import { FilenameMapping } from '../objects/FilenameMapping';
 import domtoimage from 'dom-to-image';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Location } from '@angular/common';
-import { Subscription, fromEvent, merge } from 'rxjs';
+import { Subscription, fromEvent, merge, timer } from 'rxjs';
 import { throttleTime, map } from 'rxjs/operators';
+import { RxStompState } from '@stomp/rx-stomp';
 
 @Component({
   selector: 'app-editor',
@@ -21,12 +22,15 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('editor') editor: AceComponent;
   private wsBody$: Subscription;
   private wsBodyGet$: Subscription;
+  private wsBodyGet2$: Subscription;
   private wsCommentGet$: Subscription;
+  private wsConnected$: Subscription;
   
   readonly = false;
   saved = false;
   
   shortCode: string;
+  wsConnected: boolean
   
   editorMode = "javascript";
   fontSize = "16px";
@@ -57,13 +61,15 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
       name: 'Save',
       bindKey: {win: 'Ctrl-S',  mac: 'Command-S'},
       exec: (editor) => {
-          if (!this.readonly) document.getElementById('btnSave').click();
+          if (this.wsConnected || this.shortCode || this.readonly) return;
+          document.getElementById('btnSave').click();
       },
       readOnly: true
     });
     
     const commentSection = (document.querySelector('.comment') as HTMLDivElement);
-    commentSection.scrollTop = commentSection.scrollHeight - commentSection.clientHeight;
+    if (commentSection)
+      commentSection.scrollTop = commentSection.scrollHeight - commentSection.clientHeight;
     this.checkTheme();
     AppComponent.ThemeTypeSubject.subscribe(() => this.checkTheme());
   }
@@ -71,7 +77,9 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.wsBody$) this.wsBody$.unsubscribe();
     if (this.wsBodyGet$) this.wsBodyGet$.unsubscribe();
+    if (this.wsBodyGet2$) this.wsBodyGet2$.unsubscribe();
     if (this.wsCommentGet$) this.wsCommentGet$.unsubscribe();
+    if (this.wsConnected$) this.wsConnected$.unsubscribe();
   }
 
   copyAction(event: MouseEvent) {
@@ -88,15 +96,15 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   checkTheme() {
-    (document.querySelector(".comment") as HTMLDivElement).classList.remove("comment-dark");
-    (document.querySelector(".comment") as HTMLDivElement).classList.remove("comment-light");
+    (document.querySelector(".comment") as HTMLDivElement)?.classList.remove("comment-dark");
+    (document.querySelector(".comment") as HTMLDivElement)?.classList.remove("comment-light");
     (document.querySelector(".option-panel") as HTMLDivElement).classList.remove("option-panel-light");
     (document.querySelector(".option-panel") as HTMLDivElement).classList.remove("option-panel-dark");
     if (AppComponent.ThemeType === 'light') {
-      (document.querySelector(".comment") as HTMLDivElement).classList.add("comment-light");
+      (document.querySelector(".comment") as HTMLDivElement)?.classList.add("comment-light");
       (document.querySelector(".option-panel") as HTMLDivElement).classList.add("option-panel-light");
     } else {
-      (document.querySelector(".comment") as HTMLDivElement).classList.add("comment-dark");
+      (document.querySelector(".comment") as HTMLDivElement)?.classList.add("comment-dark");
       (document.querySelector(".option-panel") as HTMLDivElement).classList.add("option-panel-dark");
     }
 
@@ -203,6 +211,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.wsBodyGet$ = keyboard$.pipe(throttleTime(100)).subscribe(next => this.sendMsg());
+    this.wsBodyGet2$ = timer(500).subscribe(next => this.sendMsg());
 
     this.wsCommentGet$ = AppComponent.GetCommentWebsocketObserverable(this.shortCode)
     .pipe(map((message) => JSON.parse(message.body) as Comment))
@@ -212,6 +221,10 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
         document.querySelector(".comment").scrollTo(0, document.querySelector(".comment").scrollHeight);
       }, 500);
     });
+
+    this.wsConnected$ = AppComponent.WebSocketConnected().subscribe(next => {
+      this.wsConnected = next === RxStompState.OPEN;
+    })
   }
 
   sendMsg() {

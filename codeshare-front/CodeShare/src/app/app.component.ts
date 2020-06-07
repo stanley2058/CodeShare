@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Theme } from './objects/Theme';
 import { v4 as uuidv4 } from 'uuid';
 import * as CryptoJS from "crypto-js";
-import { Subject, Observable, from } from "rxjs";
-import { RxStomp, RxStompConfig } from '@stomp/rx-stomp';
+import { Subject, Observable, from, BehaviorSubject } from "rxjs";
+import { RxStomp, RxStompConfig, RxStompState } from '@stomp/rx-stomp';
 
 @Component({
   selector: 'app-root',
@@ -58,6 +58,10 @@ export class AppComponent implements OnInit {
 
   static SendSocketMessage(destination: string, body: string): void {
     AppComponent.rxStomp.publish({destination, body});
+  }
+
+  static WebSocketConnected(): BehaviorSubject<RxStompState> {
+    return AppComponent.rxStomp.connectionState$;
   }
   
   ngOnInit(): void {

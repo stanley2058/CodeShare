@@ -1,11 +1,11 @@
 .card {
-    width: 250px;
     border-radius: 10px;
     padding: 10px;
     background-color: lightgoldenrodyellow;
     color: black;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 40px;
 }
 
 .time {
@@ -13,4 +13,8 @@
     text-align: right;
     font-style: italic;
     margin-top: 5px;
+}
+
+p, div {
+    overflow-wrap: break-word;
 }
