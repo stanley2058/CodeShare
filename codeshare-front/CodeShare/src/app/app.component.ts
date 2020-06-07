@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Theme } from './objects/Theme';
 import { v4 as uuidv4 } from 'uuid';
 import * as CryptoJS from "crypto-js";
-import { Subject, Observable, from, BehaviorSubject } from "rxjs";
+import { Subject, Observable, BehaviorSubject } from "rxjs";
 import { RxStomp, RxStompConfig, RxStompState } from '@stomp/rx-stomp';
 
 @Component({
@@ -11,13 +11,20 @@ import { RxStomp, RxStompConfig, RxStompState } from '@stomp/rx-stomp';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  static readonly API_URI = "http://localhost:8080/api/projects/";
-  static readonly SOCKET_URI = "ws://localhost:8080/socket";
-  static readonly SOCK_URI = "http://localhost:8080/sockjs";
+  static API_POTO = "http";
+  static WS_POTO = "ws";
+  static API_HOST = "localhost:8080";
+  static readonly API_PREFIX = AppComponent.API_POTO + "://" + AppComponent.API_HOST + "/";
+  static readonly WS_PREFIX = AppComponent.WS_POTO + "://" + AppComponent.API_HOST + "/";
+
+  static readonly API_URI = AppComponent.API_PREFIX + "api/projects/";
+  static readonly SOCKET_URI = AppComponent.WS_PREFIX + "/socket";
+  static readonly SOCK_URI = AppComponent.API_PREFIX + "sockjs";
   static readonly LS_KEY_UUID = "codeshare-uuid";
   static readonly LS_KEY_USER = "codeshare-username";
   static readonly LS_KEY_THEME = "codeshare-theme";
   static readonly SessionUUID = AppComponent.GenerateUUID();
+
   static ThemeType = "dark";
   static ThemeTypeSubject = new Subject<string>();
   private static readonly stompConfig: RxStompConfig = {
@@ -64,7 +71,18 @@ export class AppComponent implements OnInit {
     return AppComponent.rxStomp.connectionState$;
   }
   
+  prepareURI() {
+    if (!window.location.host.includes("localhost")) {
+      AppComponent.API_POTO = "https";
+      AppComponent.API_HOST = "stanley-server.ddns.net";
+      AppComponent.WS_POTO  = "wss";
+    } 
+  }
+
   ngOnInit(): void {
+    // Prepare
+    this.prepareURI();
+
     // socket
     AppComponent.rxStomp = new RxStomp();
     AppComponent.rxStomp.configure(AppComponent.stompConfig);
