@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
     return window.location.origin;
   }
 
-  aboutPage() {
-    window.location.href = window.location.origin + '/about';
+  getAboutPage() {
+    return window.location.origin + '/about';
   }
 }

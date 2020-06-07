@@ -13,7 +13,7 @@
                 </button>
             </mat-menu>
             <button *ngIf="!isAboutPage" mat-raised-button color="warn" id="btnProfile" (click)="openProfileDialog()">Profile</button>
-            <button *ngIf="!isAboutPage" mat-raised-button color="accent" class="btnAbout" (click)="aboutPage()">About</button>
+            <a href="{{getAboutPage()}}" *ngIf="!isAboutPage" mat-raised-button color="accent" class="btnAbout">About</a>
         </div>
     </mat-toolbar>
 </div>
