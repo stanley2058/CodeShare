@@ -9,7 +9,7 @@ import { FilenameMapping } from '../objects/FilenameMapping';
 import domtoimage from 'dom-to-image';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Location } from '@angular/common';
-import { Subscription, fromEvent, merge, timer } from 'rxjs';
+import { Subscription, fromEvent, merge, interval } from 'rxjs';
 import { throttleTime, map } from 'rxjs/operators';
 import { RxStompState } from '@stomp/rx-stomp';
 
@@ -207,11 +207,12 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
     const keyboard$ = merge(
       fromEvent(document.querySelector('ace'), 'keydown'),
-      fromEvent(document.querySelector('ace'), 'keyup')
+      fromEvent(document.querySelector('ace'), 'keyup'),
+      fromEvent(document.querySelector('ace'), 'input')
     );
 
     this.wsBodyGet$ = keyboard$.pipe(throttleTime(100)).subscribe(next => this.sendMsg());
-    this.wsBodyGet2$ = timer(500).subscribe(next => this.sendMsg());
+    this.wsBodyGet2$ = interval(500).subscribe(next => this.sendMsg());
 
     this.wsCommentGet$ = AppComponent.GetCommentWebsocketObserverable(this.shortCode)
     .pipe(map((message) => JSON.parse(message.body) as Comment))
