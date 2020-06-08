@@ -63,6 +63,8 @@ import { CardComponent } from './card/card.component';
 import { ProfileComponent } from './profile/profile.component'
 import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const DEFAULT_ACE_CONFIG: AceConfigInterface = {
   wrap: true,
@@ -100,7 +102,8 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     MatSnackBarModule,
     MatDialogModule,
     MatMenuModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: ACE_CONFIG, useValue: DEFAULT_ACE_CONFIG },
