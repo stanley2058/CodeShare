@@ -9,8 +9,8 @@ import { FilenameMapping } from '../objects/FilenameMapping';
 import domtoimage from 'dom-to-image';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Location } from '@angular/common';
-import { Subscription, fromEvent, merge, interval } from 'rxjs';
-import { throttleTime, map } from 'rxjs/operators';
+import { Subscription, fromEvent, merge } from 'rxjs';
+import { throttleTime, map, debounceTime } from 'rxjs/operators';
 import { RxStompState } from '@stomp/rx-stomp';
 
 @Component({
@@ -212,7 +212,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     );
 
     this.wsBodyGet$ = keyboard$.pipe(throttleTime(100)).subscribe(next => this.sendMsg());
-    this.wsBodyGet2$ = interval(500).subscribe(next => this.sendMsg());
+    this.wsBodyGet2$ = keyboard$.pipe(debounceTime(200)).subscribe(next => this.sendMsg());
 
     this.wsCommentGet$ = AppComponent.GetCommentWebsocketObserverable(this.shortCode)
     .pipe(map((message) => JSON.parse(message.body) as Comment))
