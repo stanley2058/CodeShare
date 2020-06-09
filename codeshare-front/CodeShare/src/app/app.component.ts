@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   static readonly LS_KEY_UUID = "codeshare-uuid";
   static readonly LS_KEY_USER = "codeshare-username";
   static readonly LS_KEY_THEME = "codeshare-theme";
-  static readonly SessionUUID = AppComponent.GenerateUUID();
+  static readonly SessionUUID = uuidv4();
 
   static ThemeType = "dark";
   static ThemeTypeSubject = new Subject<string>();

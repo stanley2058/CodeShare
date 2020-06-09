@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = {"http://localhost:4200", "https://codeshare.aksstw.com"})
@@ -26,6 +27,16 @@ public class CodeShareController {
         Optional<Project> project = codeShareService.getByShortCode(code);
         if (project.isPresent()) return new ResponseEntity<>(project, HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/user/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getShortCodesByUUID(@PathVariable String uuid) {
+        List<String> result = codeShareService.getHistoriesByUUID(uuid);
+        if (result != null) return new ResponseEntity<>(
+                result,
+                HttpStatus.OK
+        );
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(value = "/")

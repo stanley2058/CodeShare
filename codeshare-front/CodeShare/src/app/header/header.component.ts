@@ -25,8 +25,8 @@ export class HeaderComponent implements OnInit {
   }
 
   openProfileDialog() {
-    let dialogRef = this.dialog.open(ProfileComponent, {
-      height: '300px',
+    const dialogRef = this.dialog.open(ProfileComponent, {
+      height: '350px',
       width: '300px',
       autoFocus: false
     });

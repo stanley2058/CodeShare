@@ -1,6 +1,8 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppComponent } from '../app.component';
+import { HistoryComponent } from '../history/history.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +14,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   nameInput: HTMLInputElement;
   uuidReadonly = true;
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +41,14 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   generateUUID() {
     AppComponent.GenerateUUID();
     window.location.reload();
+  }
+
+  openHistoriesDialog() {
+    const dialogRef = this.dialog.open(HistoryComponent, {
+      height: '350px',
+      width: '300px',
+      autoFocus: false
+    });
   }
 
   toggleInput() {

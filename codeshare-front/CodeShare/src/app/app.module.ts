@@ -65,6 +65,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HistoryComponent } from './history/history.component';
 
 const DEFAULT_ACE_CONFIG: AceConfigInterface = {
   wrap: true,
@@ -82,7 +83,8 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     HeaderComponent,
     CardComponent,
     ProfileComponent,
-    AboutComponent
+    AboutComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,

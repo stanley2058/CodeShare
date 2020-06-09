@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CodeShareService {
@@ -54,6 +56,12 @@ public class CodeShareService {
         Project projectInDb = op.get();
         projectInDb.comments.add(comment);
         codeShareRepo.save(projectInDb);
+    }
+
+    public List<String> getHistoriesByUUID(String uuid) {
+        Optional<List<Project>> result = codeShareRepo.findProjectsByUUID(uuid);
+        if (result.isEmpty()) return null;
+        return result.get().stream().map(project -> String.format("ShortCode: %s (%s) ", project.shortCode, project.language)).collect(Collectors.toList());
     }
 
     private String generateShortCode(int len) {

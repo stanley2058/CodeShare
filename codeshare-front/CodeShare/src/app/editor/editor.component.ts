@@ -249,4 +249,9 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     AppComponent.SendSocketMessage("/ws/comment/" + this.shortCode, JSON.stringify(comment));
     commentInput.value = "";
   }
+
+  showReadonly() {
+    if (this.shortCode && this.project) return AppComponent.CompareUUID(this.project.UUID);
+    return !this.readonly;
+  }
 }
