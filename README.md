@@ -1,10 +1,10 @@
 # Code Share
+
 *Syntax Highlighting, Code Snipping, Code Sharing*
+
 ![codeshare_icon](codeshare.png)
 
----
-
-## [Slide](https://docs.google.com/presentation/d/1kW7zEsWrzjlJF8xMjPGvRwcqAaOSGJ5TeVq6OR5HwxI/edit?usp=sharing)
+*[Slide](https://docs.google.com/presentation/d/1kW7zEsWrzjlJF8xMjPGvRwcqAaOSGJ5TeVq6OR5HwxI/edit?usp=sharing)*
 
 ---
 
