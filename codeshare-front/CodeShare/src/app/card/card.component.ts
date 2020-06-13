@@ -16,4 +16,7 @@ export class CardComponent implements OnInit {
     this.time = new Date(this.comment.timestamp).toLocaleString();
   }
 
+  commentBody(comment: String) {
+    return this.comment.commentString.replace('\r', '').split('\n');
+  }
 }

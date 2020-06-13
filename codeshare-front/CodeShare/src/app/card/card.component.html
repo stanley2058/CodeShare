@@ -1,5 +1,5 @@
 <div class="card">
     <h3>{{comment.username}}</h3>
-    <p>{{comment.commentString}}</p>
+    <p *ngFor="let line of commentBody(comment.commentString)">{{line}}</p>
     <div class="time">{{time}}</div>
 </div>
