@@ -11,9 +11,9 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  readonly API_POTO   = window.location.host.includes("localhost") ? "http" : "https";
-  readonly WS_POTO    = window.location.host.includes("localhost") ? "ws" : "wss";
-  readonly API_HOST   = window.location.host.includes("localhost") ? "localhost:8080" : "stanley-server.ddns.net:8443";
+  readonly API_POTO   = "https";
+  readonly WS_POTO    = "wss";
+  readonly API_HOST   = "stanley-server.ddns.net:8443";
   readonly API_PREFIX = this.API_POTO + "://" + this.API_HOST + "/";
   readonly WS_PREFIX  = this.WS_POTO + "://" + this.API_HOST + "/";
 

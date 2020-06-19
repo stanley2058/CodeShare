@@ -7,7 +7,7 @@ import { Comment } from '../objects/Comment';
 import { AppComponent } from '../app.component';
 import { FilenameMapping } from '../objects/FilenameMapping';
 import domtoimage from 'dom-to-image';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatCheckboxChange, MatCheckbox } from '@angular/material/checkbox';
 import { Location } from '@angular/common';
 import { Subscription, fromEvent, merge } from 'rxjs';
 import { throttleTime, map, debounceTime } from 'rxjs/operators';
@@ -20,7 +20,9 @@ import { RxStompState } from '@stomp/rx-stomp';
 })
 export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('editor') editor: AceComponent;
+  @ViewChild('cbReadonly') cbReadonly: MatCheckbox;
   private wsBody$: Subscription;
+  private cbReadonly$: Subscription;
   private wsBodyGet$: Subscription;
   private wsBodyGet2$: Subscription;
   private wsCommentGet$: Subscription;
@@ -80,6 +82,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.wsBodyGet2$) this.wsBodyGet2$.unsubscribe();
     if (this.wsCommentGet$) this.wsCommentGet$.unsubscribe();
     if (this.wsConnected$) this.wsConnected$.unsubscribe();
+    if (this.cbReadonly$) this.cbReadonly$.unsubscribe();
   }
 
   copyAction(event: MouseEvent) {
@@ -187,6 +190,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   readonlyChanged(event: MatCheckboxChange) {
+    this.readonly = event.checked;
     if (this.project) this.project.isReadonly = event.checked;
   }
 
@@ -205,12 +209,15 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
       error => console.error(error)
     );
 
+    
+
     const keyboard$ = merge(
       fromEvent(document.querySelector('ace'), 'keydown'),
       fromEvent(document.querySelector('ace'), 'keyup'),
       fromEvent(document.querySelector('ace'), 'input')
     );
 
+    this.cbReadonly$ = this.cbReadonly.change.asObservable().subscribe(next => this.sendMsg());
     this.wsBodyGet$ = keyboard$.pipe(throttleTime(100)).subscribe(next => this.sendMsg());
     this.wsBodyGet2$ = keyboard$.pipe(debounceTime(200)).subscribe(next => this.sendMsg());
 

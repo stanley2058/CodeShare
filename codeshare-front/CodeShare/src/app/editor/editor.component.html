@@ -14,7 +14,7 @@
                 <button mat-raised-button color="accent" (click)="downloadProjectFile()">
                     <span class="material-icons">get_app</span> File
                 </button>
-                <mat-checkbox class="cbCheckbox" *ngIf="showReadonly()" (change)="readonlyChanged($event)" [checked]="project?.isReadonly" matTooltip="Readonly for other user." [matTooltipPosition]="'above'">Readonly</mat-checkbox>
+                <mat-checkbox #cbReadonly class="cbCheckbox" *ngIf="showReadonly()" (change)="readonlyChanged($event)" [checked]="project?.isReadonly" matTooltip="Readonly for other user." [matTooltipPosition]="'above'">Readonly</mat-checkbox>
                 <mat-form-field *ngIf="saved" class="shareDisplay" matTooltip="Click To Copy" [matTooltipPosition]="'above'">
                     <mat-label>Share URL</mat-label>
                     <input matInput [readonly]="true" (click)="copyAction($event)" value="{{getShareUrl()}}">
