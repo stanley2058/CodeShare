@@ -10,6 +10,8 @@
 
 *[Slide](https://docs.google.com/presentation/d/1kW7zEsWrzjlJF8xMjPGvRwcqAaOSGJ5TeVq6OR5HwxI/present?usp=sharing)*
 
+*[Slide PDF](https://drive.google.com/file/d/1S9bcoX2SpboZYhrYn6H_5_idkWXKffIB/view?usp=sharing)*
+
 ---
 
 ## Design Todo:
