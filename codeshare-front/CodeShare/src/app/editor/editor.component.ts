@@ -190,7 +190,6 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   readonlyChanged(event: MatCheckboxChange) {
-    this.readonly = event.checked;
     if (this.project) this.project.isReadonly = event.checked;
   }
 
@@ -204,12 +203,11 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
         this.project.body = next.body;
         this.project.language = next.language;
         this.project.isReadonly = next.isReadonly;
+        console.log(next.isReadonly)
         this.updateProject();
       },
       error => console.error(error)
     );
-
-    
 
     const keyboard$ = merge(
       fromEvent(document.querySelector('ace'), 'keydown'),
@@ -240,7 +238,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
       body: this.value,
       author: AppComponent.SessionUUID,
       language: this.editorMode,
-      isReadonly: this.readonly
+      isReadonly: this.project.isReadonly
     };
     AppComponent.SendSocketMessage("/ws/contentBody/" + this.shortCode, JSON.stringify(wsProject));
   }
