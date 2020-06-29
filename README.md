@@ -6,7 +6,7 @@
 
 *[Demo Video](https://youtu.be/6ck6r37MCeY)*
 
-*[Website](codeshare.aksstw.com)*
+*[Website](https://codeshare.aksstw.com)*
 
 *[Slide](https://docs.google.com/presentation/d/1kW7zEsWrzjlJF8xMjPGvRwcqAaOSGJ5TeVq6OR5HwxI/present?usp=sharing)*
 
