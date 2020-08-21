@@ -27,14 +27,14 @@
     "dom-to-image": "^2.6.0",
     "i": "^0.3.6",
     "ngx-ace-wrapper": "^9.0.1",
-    "npm": "^6.14.5",
+    "npm": "^6.14.8",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2",
-    "websocket-extensions": ">=0.1.4"
+    "websocket-extensions": ">=0.1.4",
+    "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.901.7",
+    "@angular-devkit/build-angular": "^0.1000.7",
     "@angular/cli": "~9.1.4",
     "@angular/compiler-cli": "~9.1.4",
     "@angular/language-service": "~9.1.4",
