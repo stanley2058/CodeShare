@@ -11,7 +11,7 @@
     <groupId>com.codeshare</groupId>
     <artifactId>codeshare</artifactId>
     <version>1</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>codeshare</name>
     <description>CodeShare</description>
 
