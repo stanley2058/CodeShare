@@ -1,2 +1,2 @@
 #!/bin/bash
-docker buid . -t codeshare-front-image:latest
+docker build . -t codeshare-front-image:latest
