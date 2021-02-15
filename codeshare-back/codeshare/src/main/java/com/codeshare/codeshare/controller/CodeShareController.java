@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = {"http://localhost:4200", "https://codeshare.aksstw.com"})
+@CrossOrigin(origins = {"https://codeshare.stw.tw"})
 @RestController
 @RequestMapping(value="/api/projects")
 public class CodeShareController {
