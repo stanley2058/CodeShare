@@ -7,16 +7,24 @@ services:
     restart: always
     environment:
       MONGO_INITDB_DATABASE: CodeShare
+    ports:
+      - 27017:27017
     volumes:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./mongo-volumn:/data/db
-  pdas:
+  codeshare-back:
     image: codeshare-back-image
     container_name: codeshare-back
     restart: always
     ports:
-      - 8080:8080
+      - 50001:8080
     depends_on:
       - codeshare-mongodb
     links:
       - "codeshare-mongodb:mongodb"
+  codeshare-front:
+    image: codeshare-front-image
+    container_name: codeshare-front
+    restart: always
+    ports:
+      - 50000:80

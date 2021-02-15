@@ -28,3 +28,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+app.jar
+mongo-volumn
