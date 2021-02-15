@@ -8,5 +8,5 @@ RUN npm run buildProd
 
 ### STAGE 2: Run ###
 FROM nginx:stable-alpine
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /usr/src/app/dist/code-share /usr/share/nginx/html
+COPY --from=build /usr/src/app/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /usr/src/app/dist/CodeShare /usr/share/nginx/html
