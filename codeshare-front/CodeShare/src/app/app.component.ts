@@ -13,7 +13,7 @@ import { RxStomp, RxStompConfig, RxStompState } from '@stomp/rx-stomp';
 export class AppComponent implements OnInit {
   static API_POTO = window.location.host.includes("localhost") ? "http" : "https";
   static WS_POTO = window.location.host.includes("localhost") ? "ws" : "wss";
-  static API_HOST = window.location.host.includes("localhost") ? "localhost:8080" : "stanley-server.ddns.net:8443";
+  static API_HOST = window.location.host.includes("localhost") ? "localhost:8080" : "codeshare.stw.tw:8443";
   static readonly API_PREFIX = AppComponent.API_POTO + "://" + AppComponent.API_HOST + "/";
   static readonly WS_PREFIX = AppComponent.WS_POTO + "://" + AppComponent.API_HOST + "/";
 
