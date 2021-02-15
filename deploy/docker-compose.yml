@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-  mongodb:
+  codeshare-mongodb:
     image: mongo:latest
     container_name: codeshare-mongodb
     restart: always
@@ -13,7 +13,7 @@ services:
       - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
       - ./mongo-volumn:/data/db
   codeshare-back:
-    image: codeshare-back-image
+    image: docker.stw.tw/codeshare-back-image:latest
     container_name: codeshare-back
     restart: always
     ports:
@@ -23,7 +23,7 @@ services:
     links:
       - "codeshare-mongodb:mongodb"
   codeshare-front:
-    image: codeshare-front-image
+    image: docker.stw.tw/codeshare-front-image:latest
     container_name: codeshare-front
     restart: always
     ports:
