@@ -1,65 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>CodeShare</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="assets/pink-bluegrey.css" id="themeAsset">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <title>CodeShare</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="preload stylesheet"
+      as="style"
+      href="assets/pink-bluegrey.css"
+      id="themeAsset"
+      type="text/css"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
 
-  <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
-  <link rel="apple-touch-icon" sizes="57x57" href="assets/icons/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60" href="assets/icons/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72" href="assets/icons/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76" href="assets/icons/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114" href="assets/icons/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/icons/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144" href="assets/icons/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="assets/icons/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96" href="assets/icons/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="msapplication-TileColor" content="#87ceeb">
-  <meta name="msapplication-TileImage" content="assets/icons/ms-icon-144x144.png">
+    <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="assets/icons/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="assets/icons/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="assets/icons/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="assets/icons/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="assets/icons/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="assets/icons/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="assets/icons/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="assets/icons/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/icons/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="assets/icons/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/icons/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="assets/icons/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/icons/favicon-16x16.png"
+    />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="msapplication-TileColor" content="#87ceeb" />
+    <meta
+      name="msapplication-TileImage"
+      content="assets/icons/ms-icon-144x144.png"
+    />
 
-  <!-- Primary Meta Tags -->
-  <title>Code Share - Syntax Highlighting, Code Snipping</title>
-  <meta name="title" content="Code Share - Syntax Highlighting, Code Snipping">
-  <meta name="description" content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker.">
+    <!-- Primary Meta Tags -->
+    <title>Code Share - Syntax Highlighting, Code Snipping</title>
+    <meta
+      name="title"
+      content="Code Share - Syntax Highlighting, Code Snipping"
+    />
+    <meta
+      name="description"
+      content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker."
+    />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://codeshare.aksstw.com">
-  <meta property="og:title" content="Code Share - Syntax Highlighting, Code Snipping">
-  <meta property="og:description" content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/stanley2058/CodeShare/master/codeshare-banner.png">
-  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/stanley2058/CodeShare/master/codeshare-banner.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="628">
-  <meta property="og:image:alt" content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker.">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://codeshare.aksstw.com" />
+    <meta
+      property="og:title"
+      content="Code Share - Syntax Highlighting, Code Snipping"
+    />
+    <meta
+      property="og:description"
+      content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/stanley2058/CodeShare/master/codeshare-banner.png"
+    />
+    <meta
+      property="og:image:secure_url"
+      content="https://raw.githubusercontent.com/stanley2058/CodeShare/master/codeshare-banner.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="628" />
+    <meta
+      property="og:image:alt"
+      content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker."
+    />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://codeshare.aksstw.com">
-  <meta property="twitter:title" content="Code Share - Syntax Highlighting, Code Snipping">
-  <meta property="twitter:description" content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker.">
-  <meta property="twitter:image" content="https://raw.githubusercontent.com/stanley2058/CodeShare/master/codeshare-banner.png">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://codeshare.aksstw.com" />
+    <meta
+      property="twitter:title"
+      content="Code Share - Syntax Highlighting, Code Snipping"
+    />
+    <meta
+      property="twitter:description"
+      content="CodeShare provided you with realtime code sharing, code snipping and realtime communication with your co-worker."
+    />
+    <meta
+      property="twitter:image"
+      content="https://raw.githubusercontent.com/stanley2058/CodeShare/master/codeshare-banner.png"
+    />
 
-  <script>
-    var global = window;
-  </script>
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#87ceeb">
-</head>
-<body class="mat-typography mat-app-background">
-  <app-root></app-root>
-  <noscript>Please enable JavaScript to continue using this application.</noscript>
-</body>
+    <script>
+      var global = window;
+    </script>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#87ceeb" />
+  </head>
+  <body class="mat-typography mat-app-background">
+    <app-root></app-root>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+  </body>
 </html>

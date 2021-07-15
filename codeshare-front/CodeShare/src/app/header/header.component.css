@@ -1,48 +1,47 @@
 .code-share-header {
-    width: 100%;
-    height: 60px;
+  width: 100%;
+  height: 60px;
 }
 
 h1 {
-    font-size: 22pt;
+  font-size: 22pt;
 }
 
 #btnProfile {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 img {
-    height: 50px;
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .btnAbout {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .btnPanel {
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    right: 20px;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 20px;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
 @media screen and (max-width: 500px) {
-    mat-toolbar {
-        height: 130px;
-        display: flex;
-        flex-direction: column;
-    }
-    .code-share-header {
-        height: 130px;
-    }
-    .btnPanel {
-        position: relative;
-        margin-top: 5px;
-    }
+  mat-toolbar {
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+  }
+  .code-share-header {
+    height: 130px;
+  }
+  .btnPanel {
+    position: relative;
+    margin-top: 5px;
+  }
 }
