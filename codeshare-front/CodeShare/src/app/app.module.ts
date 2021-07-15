@@ -12,7 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatTooltipModule, MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER } from '@angular/material/tooltip';
+import {
+  MatTooltipModule,
+  MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
+} from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -22,30 +25,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AceModule } from 'ngx-ace-wrapper';
 import { ACE_CONFIG } from 'ngx-ace-wrapper';
 import { AceConfigInterface } from 'ngx-ace-wrapper';
-import 'brace';
 
-// <-- Ace Mode Import -->
-import 'brace/mode/html';
-import 'brace/mode/java';
-import 'brace/mode/javascript';
-import 'brace/mode/csharp';
-import 'brace/mode/python';
-import 'brace/mode/xml';
-import 'brace/mode/ruby';
-import 'brace/mode/c_cpp';
-import 'brace/mode/css';
-import 'brace/mode/json';
-import 'brace/mode/coffee';
-import 'brace/mode/dockerfile';
-import 'brace/mode/fortran';
-import 'brace/mode/golang';
-import 'brace/mode/jsp';
-import 'brace/mode/kotlin';
-import 'brace/mode/markdown';
-import 'brace/mode/php';
-import 'brace/mode/r';
-import 'brace/mode/swift';
-import 'brace/mode/yaml';
+// import 'brace';
 
 // <-- Ace Theme Import -->
 import 'brace/theme/tomorrow_night_eighties';
@@ -60,7 +41,7 @@ import { EditorComponent } from './editor/editor.component';
 import { CommentComponent } from './comment/comment.component';
 import { HeaderComponent } from './header/header.component';
 import { CardComponent } from './card/card.component';
-import { ProfileComponent } from './profile/profile.component'
+import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AboutComponent } from './about/about.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -84,7 +65,7 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     CardComponent,
     ProfileComponent,
     AboutComponent,
-    HistoryComponent
+    HistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -105,12 +86,14 @@ const DEFAULT_ACE_CONFIG: AceConfigInterface = {
     MatDialogModule,
     MatMenuModule,
     MatCheckboxModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     { provide: ACE_CONFIG, useValue: DEFAULT_ACE_CONFIG },
-    MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER
+    MAT_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
