@@ -66,9 +66,9 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
       this.project.id = null;
       this.project.shortCode = null;
       this.project.comments = [];
-    }
 
-    this.dynamicImportMode();
+      this.dynamicImportMode();
+    }
   }
 
   ngAfterViewInit() {
@@ -158,6 +158,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
         if (res) {
           this.project = res;
           this.updateProject();
+          this.dynamicImportMode();
           this.saved = true;
         }
       });
