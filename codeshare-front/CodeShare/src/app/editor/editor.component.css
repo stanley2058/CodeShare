@@ -1,13 +1,10 @@
-:root {
-  --control-panel-height: 6em;
-}
-
 ace {
   width: 100%;
   height: calc(100% - var(--control-panel-height));
 }
 
 .editor-panel {
+  --control-panel-height: 6em;
   width: 80%;
   height: 100%;
   display: flex;
@@ -152,10 +149,8 @@ ace {
 }
 
 @media screen and (max-width: 670px) {
-  :root {
-    --control-panel-height: 6em;
-  }
   .editor-panel {
+    --control-panel-height: 6em;
     width: calc(100% - 20px);
   }
   .center-container {
@@ -177,7 +172,7 @@ ace {
 }
 
 @media screen and (max-width: 500px) {
-  :root {
+  .editor-panel {
     --control-panel-height: 10em;
   }
   .center-container {
@@ -194,7 +189,7 @@ ace {
 }
 
 @media screen and (max-height: 795px) {
-  :root {
+  .editor-panel {
     --control-panel-height: 10em;
   }
   .control-panel button,
