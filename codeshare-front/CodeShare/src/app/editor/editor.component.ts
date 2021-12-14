@@ -26,6 +26,7 @@ import { RxStompState } from '@stomp/rx-stomp';
 })
 export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('editor') editor: AceComponent;
+  @ViewChild('hiddenEditor') hiddenEditor: AceComponent;
   @ViewChild('cbReadonly') cbReadonly: MatCheckbox;
   private wsBody$: Subscription;
   private cbReadonly$: Subscription;
@@ -33,6 +34,10 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   private wsBodyGet2$: Subscription;
   private wsCommentGet$: Subscription;
   private wsConnected$: Subscription;
+
+  private readonly username =
+    localStorage.getItem('codeshare-username') || 'Anonymous';
+  private readonly uuid = AppComponent.GetHashUUID();
 
   readonly = false;
   saved = false;
@@ -45,6 +50,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   fontSize = '16px';
   editorTheme = 'tomorrow_night_eighties';
   value = '';
+  hiddenValue = '';
 
   project: Project;
 
@@ -88,6 +94,18 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
         commentSection.scrollHeight - commentSection.clientHeight;
     this.checkTheme();
     AppComponent.ThemeTypeSubject.subscribe(() => this.checkTheme());
+
+    const hiddenEditorSession = this.hiddenEditor.directiveRef
+      .ace()
+      .getSession();
+
+    hiddenEditorSession.getDocument().on('change', (e) => {
+      this.editor.directiveRef
+        .ace()
+        .getSession()
+        .getDocument()
+        .applyDeltas([e]);
+    });
   }
 
   ngOnDestroy() {
@@ -101,11 +119,16 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
   copyAction(event: MouseEvent) {
     const input = event.target as HTMLInputElement;
-    input.select();
-    input.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-
-    this.snackBar.open('Copied!!', 'OK', { duration: 2000 });
+    navigator.clipboard.writeText(input.value).then(
+      () => {
+        this.snackBar.open('Copied!!', 'OK', { duration: 2000 });
+      },
+      () => {
+        input.select();
+        input.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+      }
+    );
   }
 
   fontSizeChanged() {
@@ -166,7 +189,7 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateProject() {
     this.editorMode = this.project.language;
-    this.value = this.project.body;
+    this.hiddenValue = this.project.body;
     this.readonly = this.project.isReadonly;
     this.shortCode = this.project.shortCode;
     if (AppComponent.CompareUUID(this.project.UUID)) this.readonly = false;

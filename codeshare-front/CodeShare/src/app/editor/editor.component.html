@@ -2,6 +2,7 @@
   <div><app-header></app-header></div>
   <div class="center-container">
     <div class="editor-panel">
+      <ace hidden #hiddenEditor [(value)]="hiddenValue"></ace>
       <ace
         [mode]="internalEditorMode"
         [theme]="editorTheme"
