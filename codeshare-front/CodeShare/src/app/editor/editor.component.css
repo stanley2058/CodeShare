@@ -1,4 +1,4 @@
-::root {
+:root {
   --control-panel-height: 6em;
 }
 
@@ -152,9 +152,11 @@ ace {
 }
 
 @media screen and (max-width: 670px) {
+  :root {
+    --control-panel-height: 6em;
+  }
   .editor-panel {
     width: calc(100% - 20px);
-    --control-panel-height: 6em;
   }
   .center-container {
     overflow: hidden;
@@ -175,7 +177,7 @@ ace {
 }
 
 @media screen and (max-width: 500px) {
-  ::root {
+  :root {
     --control-panel-height: 10em;
   }
   .center-container {
@@ -192,7 +194,7 @@ ace {
 }
 
 @media screen and (max-height: 795px) {
-  ::root {
+  :root {
     --control-panel-height: 10em;
   }
   .control-panel button,
