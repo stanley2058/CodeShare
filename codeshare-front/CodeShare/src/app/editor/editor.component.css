@@ -3,6 +3,11 @@ ace {
   height: calc(100% - var(--control-panel-height));
 }
 
+.hidden-ace {
+  display: none;
+  height: 0;
+}
+
 .editor-panel {
   --control-panel-height: 6em;
   width: 80%;
