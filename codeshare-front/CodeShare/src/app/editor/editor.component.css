@@ -1,215 +1,196 @@
 ace {
-    width: 100%;
-    height: 90%;
+  width: 100%;
+  height: calc(100% - 6em);
 }
 
 .editor-panel {
-    width: 80%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .center-container {
-    width: 100%;
-    height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: row;
 }
 
 .option-panel {
-    width: 20%;
-    height: 100%;
+  width: 20%;
+  height: 100%;
 }
 .option-panel-light {
-    background-color: white;
+  background-color: white;
 }
 .option-panel-dark {
-    background-color: darkcyan;
+  background-color: darkcyan;
 }
 
 .editor-options {
-    height: 80px;
-    width: 100%;
+  height: 80px;
+  width: 100%;
 }
 
 .languageSelect {
-    width: 80px;
-    margin-left: 40px;
-    margin-top: 20px;
+  width: 80px;
+  margin-left: 40px;
+  margin-top: 20px;
 }
 
 .fontsizeSelect {
-    width: 80px;
-    margin-left: 40px;
-    margin-top: 20px;
+  width: 80px;
+  margin-left: 40px;
+  margin-top: 20px;
 }
 
 .comment-section {
-    height: calc(100% - 100px);
+  height: calc(100% - 100px);
 }
 
 .comment {
-    width: calc(100% - 40px);
-    height: calc(100% - 100px);
-    max-height: calc(100% - 160px);
-    overflow: auto;
-    padding-left: 40px;
+  width: calc(100% - 40px);
+  height: calc(100% - 100px);
+  max-height: calc(100% - 160px);
+  overflow: auto;
+  padding-left: 40px;
 }
 .comment-light {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 .comment-dark {
-    background-color: darkslategray;
+  background-color: darkslategray;
 }
 
 .commentInput {
-    margin-top: 10px;
-    margin-left: 40px;
+  margin-top: 10px;
+  margin-left: 40px;
 }
 .commentInput mat-form-field {
-    width: calc(100% - 40px);
-    height: 80px;
+  width: calc(100% - 40px);
+  height: 80px;
 }
 
 #submitComment {
-    position: relative;
-    top: 20px;
+  position: relative;
+  top: 20px;
 }
 
 .control-panel {
-    display: flex;
-    flex-direction: row;
-    height: 60px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  height: 6em;
+  overflow: hidden;
 }
 
 .control-panel button {
-    height: 40px;
+  height: 40px;
 }
 
-.control-panel button, .shareDisplay {
-    margin-top: 20px;
-    margin-left: 30px;
+.control-panel button,
+.shareDisplay {
+  margin-top: 20px;
+  margin-left: 30px;
 }
 
 .shareDisplay {
-    height: 40px;
-    width: 250px;
+  height: 40px;
+  width: 250px;
 }
 
 .shareDisplay input {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .cbCheckbox {
-    position: relative;
-    top: 30px;
-    margin-left: 30px;
+  position: relative;
+  top: 30px;
+  margin-left: 30px;
 }
 
-.link, .linkOff {
-    font-size: 36pt;
-    cursor: default;
-    margin-top: 15px;
-    margin-left: 30px;
+.link,
+.linkOff {
+  font-size: 36pt;
+  cursor: default;
+  margin-top: 15px;
+  margin-left: 30px;
 }
 .link {
-    color: greenyellow;
+  color: greenyellow;
 }
 .linkOff {
-    color: orangered;
+  color: orangered;
 }
 
 @media screen and (max-width: 1450px) {
-    ace {
-        height: 80%;
-    }
+  .control-panel {
+    flex-wrap: wrap;
+  }
 
-    .control-panel {
-        flex-wrap: wrap;
-        height: 18%;
-    }
+  .editor-panel {
+    width: 70%;
+  }
 
-    .editor-panel {
-        width: 70%;
-    }
-
-    .option-panel {
-        width: 30%;
-    }
+  .option-panel {
+    width: 30%;
+  }
 }
 
 @media screen and (max-width: 860px) {
-    .editor-panel {
-        width: 60%;
-    }
+  .editor-panel {
+    width: 60%;
+  }
 
-    .option-panel {
-        width: 40%;
-    }
+  .option-panel {
+    width: 40%;
+  }
 }
 
-
 @media screen and (max-width: 670px) {
-    .center-container {
-        overflow: hidden;
-    }
-    .editor-panel {
-        width: calc(100% - 20px);
-    }
-    .option-panel {
-        position: absolute;
-        right: 0;
-        z-index: 999;
-        height: calc(100vh - 60px);
-        transition: 200ms;
-        width: 20px;
-        overflow: hidden;
-    }
-    .option-panel:hover {
-        width: 300px;
-        transition: 200ms;
-    }
+  .center-container {
+    overflow: hidden;
+  }
+  .option-panel {
+    position: absolute;
+    right: 0;
+    z-index: 999;
+    height: calc(100vh - 60px);
+    transition: 200ms;
+    width: 20px;
+    overflow: hidden;
+  }
+  .option-panel:hover {
+    width: 300px;
+    transition: 200ms;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    .center-container {
-        height: calc(100vh - 130px);
-    }
-    ace {
-        height: 70%;
-    }
-    .control-panel {
-        height: 28%;
-    }
-    .cbCheckbox {
-        top: 18px;
-        height: 24px;
-    }
-    .option-panel {
-        height: 100vh;
-        top: 0;
-    }
+  .center-container {
+    height: calc(100vh - 130px);
+  }
+  .cbCheckbox {
+    top: 18px;
+    height: 24px;
+  }
+  .option-panel {
+    height: 100vh;
+    top: 0;
+  }
 }
 
 @media screen and (max-height: 795px) {
-    .control-panel button, .shareDisplay {
-        margin-top: 10px;
-    }
-    .link, .linkOff {
-        margin-top: 5px;
-    }
-    .cbCheckbox {
-        top: 18px;
-        height: 24px;
-    }
-}
-@media screen and (max-height: 605px) {
-    ace {
-        height: 70%;
-    }
-    .control-panel {
-        height: 28%;
-    }
+  .control-panel button,
+  .shareDisplay {
+    margin-top: 10px;
+  }
+  .link,
+  .linkOff {
+    margin-top: 5px;
+  }
+  .cbCheckbox {
+    top: 18px;
+    height: 24px;
+  }
 }
