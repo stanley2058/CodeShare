@@ -2,7 +2,6 @@
   <div><app-header></app-header></div>
   <div class="center-container">
     <div class="editor-panel">
-      <ace hidden #hiddenEditor class="hidden-ace"></ace>
       <ace
         [mode]="internalEditorMode"
         [theme]="editorTheme"
@@ -10,6 +9,7 @@
         [disabled]="readonly"
         #editor
       ></ace>
+      <ace hidden #hiddenEditor class="hidden-ace"></ace>
       <div class="control-panel">
         <button
           mat-raised-button
