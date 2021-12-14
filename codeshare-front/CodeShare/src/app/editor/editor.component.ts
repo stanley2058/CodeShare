@@ -29,15 +29,9 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('hiddenEditor') hiddenEditor: AceComponent;
   @ViewChild('cbReadonly') cbReadonly: MatCheckbox;
   private wsBody$: Subscription;
-  private cbReadonly$: Subscription;
   private wsBodyGet$: Subscription;
-  private wsBodyGet2$: Subscription;
   private wsCommentGet$: Subscription;
   private wsConnected$: Subscription;
-
-  private readonly username =
-    localStorage.getItem('codeshare-username') || 'Anonymous';
-  private readonly uuid = AppComponent.GetHashUUID();
 
   readonly = false;
   saved = false;
@@ -50,7 +44,6 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   fontSize = '16px';
   editorTheme = 'tomorrow_night_eighties';
   value = '';
-  hiddenValue = '';
 
   project: Project;
 
@@ -111,10 +104,8 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy() {
     if (this.wsBody$) this.wsBody$.unsubscribe();
     if (this.wsBodyGet$) this.wsBodyGet$.unsubscribe();
-    if (this.wsBodyGet2$) this.wsBodyGet2$.unsubscribe();
     if (this.wsCommentGet$) this.wsCommentGet$.unsubscribe();
     if (this.wsConnected$) this.wsConnected$.unsubscribe();
-    if (this.cbReadonly$) this.cbReadonly$.unsubscribe();
   }
 
   copyAction(event: MouseEvent) {
@@ -189,9 +180,13 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateProject() {
     this.editorMode = this.project.language;
-    this.hiddenValue = this.project.body;
     this.readonly = this.project.isReadonly;
     this.shortCode = this.project.shortCode;
+    this.hiddenEditor.directiveRef
+      .ace()
+      .getSession()
+      .getDocument()
+      .setValue(this.project.body);
     if (AppComponent.CompareUUID(this.project.UUID)) this.readonly = false;
     if (this.shortCode && !this.wsBody$) {
       setTimeout(() => {
@@ -282,15 +277,11 @@ export class EditorComponent implements OnInit, AfterViewInit, OnDestroy {
       fromEvent(document.querySelector('ace'), 'input')
     );
 
-    this.cbReadonly$ = this.cbReadonly.change
-      .asObservable()
-      .subscribe((next) => this.sendMsg());
-    this.wsBodyGet$ = keyboard$
-      .pipe(throttleTime(100))
-      .subscribe((next) => this.sendMsg());
-    this.wsBodyGet2$ = keyboard$
-      .pipe(debounceTime(200))
-      .subscribe((next) => this.sendMsg());
+    this.wsBodyGet$ = merge(
+      this.cbReadonly.change.asObservable(),
+      keyboard$.pipe(throttleTime(100)),
+      keyboard$.pipe(debounceTime(200))
+    ).subscribe(() => this.sendMsg());
 
     this.wsCommentGet$ = AppComponent.GetCommentWebsocketObserverable(
       this.shortCode
